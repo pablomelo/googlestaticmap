@@ -249,6 +249,11 @@ class MapPath
   # MapPositions for each point on the line
   attr_accessor :points
 
+  # Indicates that the requested path should be interpreted as a geodesic line
+  # that follows the curvature of the Earth. When false, the path is rendered
+  # as a straight line in screen space. Defaults to false. Optional.
+  attr_accessor :geodesic
+
   # Pass an optional hash of arguments
   def initialize(attrs={})
     @points = []
