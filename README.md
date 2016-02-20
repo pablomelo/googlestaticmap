@@ -30,7 +30,7 @@ this URL as the src of an img element on an HTML page
 When using the url function you can force the final url to use http or https:
 
     image_url = map.url('http')
-    
+
 Get a map with blue markers at the White House and the Supreme Court, zoomed
 the closest that the map can be with both markers visible, at the default
 size.  image will be the binary data of the map
@@ -74,7 +74,11 @@ You can also specify a channel for better tracking if you are a Maps For Busines
 
     map.channel = "Tracking channel"
 
+## Testing
 
+To run test suite:
+
+`bundle exec rake test`
 
 ## Compatibility
 

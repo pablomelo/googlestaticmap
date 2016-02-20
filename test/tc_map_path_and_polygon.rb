@@ -41,6 +41,31 @@ class MapPathAndPolygonTest < Test::Unit::TestCase #:nodoc: all
     URI.parse(m.to_s)
   end
 
+  def test_set_geodesic_parameters
+    p = nil
+    assert_nothing_raised { p = geodesic_path }
+    assert_equal 4, p.weight
+    assert_equal true, p.geodesic
+    assert_equal "0xFF0000FF", p.color
+    assert_equal 2, p.points.length
+  end
+
+  def test_get_geodesic_string
+    p = geodesic_path
+    s = nil
+    assert_nothing_raised { s = p.to_s }
+    assert_equal 5, s.split(MAP_SEPARATOR).length
+    assert s.include?("color:0xFF0000FF")
+    assert s.include?("geodesic:true")
+    assert s.include?("loc3")
+    assert s.include?("loc4")
+  end
+
+  def test_geodesic_string_is_a_valid_ruby_uri
+    m = geodesic_path
+    URI.parse(m.to_s)
+  end
+
   def test_polygon
     # Polygon inherits from MapPath and uses MapPath's to_s method, so only
     # limited testing needs to happen here
@@ -62,4 +87,11 @@ class MapPathAndPolygonTest < Test::Unit::TestCase #:nodoc: all
                             MapLocation.new(:address => "loc2")])
   end
 
+  def geodesic_path
+    MapPath.new(:weight => 4,
+                :color => "0xFF0000FF",
+                :geodesic => true,
+                :points => [MapLocation.new(:address => "loc3"),
+                            MapLocation.new(:address => "loc4")])
+  end
 end
